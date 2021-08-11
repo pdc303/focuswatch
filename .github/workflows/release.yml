@@ -30,11 +30,9 @@ jobs:
           msystem: MINGW64
           update: true
           install: git mingw-w64-x86_64-toolchain make zip
-
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: make package
-        
       - name: release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
