@@ -15,6 +15,12 @@ dist/focuswatch.exe: dist focuswatch.c focuswatch_util.c
 dist:
 	mkdir dist
 
+dist/focuswatch.zip: dist/focuswatch.exe
+	zip -j dist/focuswatch.zip dist/focuswatch.exe
+
+.PHONY: package
+package: dist/focuswatch.zip
+
 clean:
 	rm -f dist/focuswatch.exe
 	rm -rf dist
