@@ -1,0 +1,2 @@
+FocusWatch is a tool for monitoring which window currently has focus on the system.
+This is useful for tracking down what is stealing focus from games or other foreground windows.
