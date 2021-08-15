@@ -34,5 +34,5 @@ jobs:
           install: git mingw-w64-x86_64-toolchain make
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - name: run make
         run: make
