@@ -20,5 +20,6 @@ void init_focus_info(struct focus_info *fi);
  * -EFAULT: Other error.
  */
 int get_current_focus_info(struct focus_info *fi);
+void get_now_time_string(wchar_t *sout, size_t sz);
 
 #endif // __FOCUSWATCH_UTIL_H__

@@ -4,6 +4,8 @@
 #include <winuser.h>
 #include <winbase.h>
 #include <psapi.h>
+#include <time.h>
+#include <assert.h>
 #include "focuswatch_util.h"
 
 void init_focus_info(struct focus_info *fi)
@@ -57,7 +59,7 @@ int get_current_focus_info(struct focus_info *fi)
 		if(ecode == 0) {
 			wcsncpy(new_name, L"(empty)", _countof(new_name));
 		} else {
-			fprintf(stderr, "Error code %lu getting window title\n", ecode);
+			wcsncpy(new_name, L"(error)", _countof(new_name));
 		}
 	}
 
@@ -70,7 +72,6 @@ int get_current_focus_info(struct focus_info *fi)
 	b = QueryFullProcessImageName(hprocess, 0, new_exe_path, &bufsz);
 
 	if(b == false) {
-		fprintf(stderr, "Error getting module base name");
 		ret = -EAGAIN;
 		goto err_out_close_process;
 	}
@@ -87,4 +88,16 @@ err_out_close_process:
 	CloseHandle(hprocess);
 
 	return ret;
+}
+
+void get_now_time_string(wchar_t *sout, size_t sz)
+{
+	time_t t;
+	struct tm *tmp;
+
+	t = time(NULL);
+	tmp = localtime(&t);
+	assert(tmp);
+
+	wcsftime(sout, sz, L"%H:%M:%S", tmp);
 }
